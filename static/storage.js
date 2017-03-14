@@ -23,7 +23,7 @@ $(document).ready(function () {
 
     // FUNC. CREATE DIV
     var create_division = function (item) {
-        $(".row").append("<div class='col-sm-3'><div class='col-sm-12'style='height: 300px; border: solid black;'><h1></h1></div></div>");
+        $(".row").append("<div class='col-sm-3'><div class='col-sm-12'style='height: 300px; border-radius: 10px; background: #FFE345'><h1></h1></div></div>");
         $("h1:last").html(item);
     }
 
@@ -38,7 +38,5 @@ $(document).ready(function () {
         localStorage.setItem("list", JSON.stringify(boardList))
     };
     list_all_board(loadBoard);
-    alert(loadBoard.length);
-    alert(boardList.length);
 
 });
