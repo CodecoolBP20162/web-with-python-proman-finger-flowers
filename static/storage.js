@@ -31,12 +31,14 @@ $(document).ready(function () {
     var board1 = new Board("board1");
     var board2 = new Board("board2");
     var loadBoard = JSON.parse(localStorage.getItem("list"));
-    boardList = loadBoard;
-    if (loadBoard.length < 1) {
+    if (loadBoard) {
+        boardList = loadBoard;
+        list_all_board(loadBoard);
+    } else {
         boardList.push(board1);
         boardList.push(board2);
+        list_all_board(boardList);
         localStorage.setItem("list", JSON.stringify(boardList))
     };
-    list_all_board(loadBoard);
 
 });
