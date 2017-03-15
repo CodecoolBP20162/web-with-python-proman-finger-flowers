@@ -12,10 +12,9 @@ def listing():
 def cards():
     return render_template("cards.html")
 
-@app.route('/add', methods=['GET'])
+@app.route('/funny_dog', methods=['GET'])
 def show_detailed_board_page():
-    #board = request.form['title']
-    return render_template("detailed_board_page.html")
+    return render_template("funny_dog.html")
 
 @app.route('/add', methods=['POST'])
 def add_new_board():
