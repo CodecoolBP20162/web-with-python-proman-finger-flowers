@@ -16,7 +16,6 @@ $(document).ready(function () {
         var board_title = prompt("Board Title: ");
         var board = new Board(board_title);
         boardList.push(board);
-        alert(boardList.length);
         localStorage.setItem("list", JSON.stringify(boardList));
         create_division(board.title);
     });
@@ -28,6 +27,7 @@ $(document).ready(function () {
     }
 
     // START
+    //localStorage.clear()
     var board1 = new Board("board1");
     var board2 = new Board("board2");
     var loadBoard = JSON.parse(localStorage.getItem("list"));
