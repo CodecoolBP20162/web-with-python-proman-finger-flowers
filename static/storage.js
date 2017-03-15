@@ -20,6 +20,7 @@ $(document).ready(function () {
     $("#add_new_board").click(function () {
         var board_title = prompt("Board Title: ");
         var board = new Board(board_title);
+        localStorage.setItem("boardTitle", board_title)
         boardList.push(board);
         localStorage.setItem("boardList", JSON.stringify(boardList));
         createBoard(board);
