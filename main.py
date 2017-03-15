@@ -8,6 +8,10 @@ app.config.from_object(__name__)
 def listing():
     return render_template("index.html")
 
+@app.route('/cards')
+def cards():
+    return render_template("cards.html")
+
 @app.route('/add', methods=['GET'])
 def show_detailed_board_page():
     #board = request.form['title']
