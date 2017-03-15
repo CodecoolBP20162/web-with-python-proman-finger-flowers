@@ -18,7 +18,7 @@ $(document).ready(function () {
 
     // ADD NEW BOARD
     $("#add_new_board").click(function () {
-        var board_title = prompt("Board Title: ");
+        var board_title = $("#boardTitle").val();
         var board = new Board(board_title);
         localStorage.setItem("boardTitle", board_title)
         boardList.push(board);
@@ -67,7 +67,7 @@ $(document).ready(function () {
 
     // ADD NEW CARD
     $("#add_new_card").click(function () {
-        var card_title = prompt("Card Title: ");
+        var card_title = $("#cardTitle").val();
         var card = new Card(card_title);
         for (board in boardList) {
             if (boardList[board].title === localStorage.getItem("boardTitle")) {

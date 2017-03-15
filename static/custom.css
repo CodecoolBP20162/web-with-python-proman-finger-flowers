@@ -59,3 +59,14 @@ li.active a {
   font-weight: bold;
   color: #333;
 }
+
+.modal-header {
+  background-color: #09B2A8;
+  text-align: center;
+  color: #fff;
+}
+
+.modal-body {
+  text-align: center;
+}
+
