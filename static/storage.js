@@ -24,6 +24,7 @@ $(document).ready(function () {
         boardList.push(board);
         localStorage.setItem("boardList", JSON.stringify(boardList));
         createBoard(board);
+        board_title = $("#boardTitle").val("");
     });
 
     // FUNC. CREATE BOARD DIV
@@ -87,6 +88,7 @@ $(document).ready(function () {
         };
         localStorage.setItem("boardList", JSON.stringify(boardList));
         createCard(card);
+        card_title = $("#cardTitle").val("");
     });
 
 
@@ -105,4 +107,5 @@ $(document).ready(function () {
     };
     getBoardTitle();
     detailedBoard();
+    $('.row').sortable();
 });
