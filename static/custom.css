@@ -1,3 +1,13 @@
-.board {height: 300px;
-        border-radius: 10px;
-        background: #FFE345}
+.board {
+    height: 300px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background: #FFE345
+}
+
+.card {
+    height: 300px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    background: pink;
+}
