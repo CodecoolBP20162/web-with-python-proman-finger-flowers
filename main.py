@@ -4,15 +4,14 @@ app = Flask(__name__)
 app.config.from_object(__name__)
 
 
-@app.route('/adder')
 @app.route('/')
 def listing():
     return render_template("index.html")
 
 @app.route('/add', methods=['GET'])
-def new_board():
+def show_detailed_board_page():
     #board = request.form['title']
-    return render_template("create_new.html")
+    return render_template("detailed_board_page.html")
 
 @app.route('/add', methods=['POST'])
 def add_new_board():
