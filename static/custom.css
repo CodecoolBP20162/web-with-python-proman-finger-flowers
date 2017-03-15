@@ -1,15 +1,62 @@
 .board {
-    height: 300px;
+    height: 200px;
     margin-bottom: 20px;
-    border-radius: 10px;
-    background: pink;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background: #F5F5F5;
+    box-shadow: 3px 3px 5px #303030;
+    color: #432E41;
+    text-align: center;
+    opacity: 0.8
+}
+
+.board:hover, .card:hover {
+  transition: 0.5s;
+  opacity: 1;
+  border-radius: 40px;
+}
+
+.boardTitle {
+  color: #fff;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-color: #EB524A;
+  padding: 5px;
+}
+
+.label-success {
+  background-color: #EB524A;
+  color: #fff;
+  border-radius: 180px;
 }
 
 .card {
-    height: 300px;
+    height: 200px;
     margin-bottom: 20px;
-    border-radius: 10px;
-    background: pink;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background: #F5F5F5;
+    box-shadow: 3px 3px 5px  #303030;
+    text-align: center;
+    color: #432E41;
+    opacity: 0.8;
+}
+
+.cardTitle {
+  background-color: #27D0B9;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 5px;
+  color: #fff;
+}
+
+.divBoardHeader {
+  background: #EB524A;
+  text-align: center;
+  color: white;
+  letter-spacing: 10px;
+  padding-top: 1px;
+  padding-bottom: 3px;
 }
 
 * {
@@ -61,7 +108,7 @@ li.active a {
 }
 
 .modal-header {
-  background-color: #09B2A8;
+  background-color: #27D0B9;
   text-align: center;
   color: #fff;
 }
