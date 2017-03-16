@@ -11,7 +11,7 @@ $(document).ready(function () {
         this.status = status;
 
     }
-    
+
     // LIST BOARDS /////////////////////////////////////////////////////////////////
     function listBoards(list_of_boards) {
         for (var oneBoard in list_of_boards) {
