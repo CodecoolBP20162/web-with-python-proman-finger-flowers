@@ -3,9 +3,9 @@
 <body>
 	<div class="container-fluid">
 		<div class='divBoardHeader'></div>
-		<button class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Create new Card</button>
+		<button class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal2">Create new Card</button>
 		<!-- Modal -->
-		<div class="modal fade" id="myModal" role="dialog">
+		<div class="modal fade" id="myModal2" role="dialog">
 			<div class="modal-dialog modal-sm">
 				<!-- Modal content-->
 				<form>
@@ -19,6 +19,19 @@
 								<label for="cardTitle">Card Title:</label>
 								<input type="text" class="form-control" id="cardTitle" autofocus>
 							</div>
+							<div class="form-group">
+                            	<label for="cardText">Card Text:</label>
+                            	<input type="text" class="form-control" id="cardText" autofocus>
+                        	</div>
+                        	<div class="form-group">
+                            	<label for="select">Card Status:</label>
+                            	 <br><select id="select">
+									<option value="New">New</option>
+									<option value="In Progress">In Progress</option>
+									<option value="Review">Review</option>
+									<option value="Done">Done</option>
+									</select>
+                        	</div>
 						</div>
 						<div class="modal-footer">
 							<center>
