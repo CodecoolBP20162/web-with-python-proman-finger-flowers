@@ -9,9 +9,10 @@ footer {
   padding: 1rem;
 }
 
-.background {
-    height: 600px;
-    background: url(iphone.jpg) bottom center no-repeat;
+body {
+    /*height: 600px;*/
+    background-image: url("/static/1.jpeg");
+    background-size: cover;
 }
 
 .board {
@@ -84,13 +85,21 @@ footer {
 .clear_button {
     padding-bottom: 3rem;
 }
+
+div.dog {
+    position: fixed;
+  top: 50%;
+  left: 50%;
+  margin-top: -120px;
+  margin-left: -140px;
+}
 * {
   margin: 0;
   padding: 0;
 }
 
 nav {
-  margin: 25px;
+  margin: 30px;
 }
 
 ul {
