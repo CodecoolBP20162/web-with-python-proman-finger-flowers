@@ -1,0 +1,125 @@
+.board {
+    height: 200px;
+    margin-bottom: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background: #F5F5F5;
+    box-shadow: 3px 3px 5px #303030;
+    color: #432E41;
+    text-align: center;
+    opacity: 0.8
+}
+
+.board:hover, .card:hover {
+  transition: 0.5s;
+  opacity: 1;
+  border-radius: 40px;
+}
+
+.boardTitle {
+  color: #fff;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+  background-color: #EB524A;
+  padding: 5px;
+}
+
+.label-success {
+  background-color: #EB524A;
+  color: #fff;
+  border-radius: 180px;
+}
+
+.card {
+    height: 200px;
+    margin-bottom: 20px;
+    border-bottom-left-radius: 20px;
+    border-top-right-radius: 20px;
+    background: #F5F5F5;
+    box-shadow: 3px 3px 5px  #303030;
+    text-align: center;
+    color: #432E41;
+    opacity: 0.8;
+}
+
+.cardTitle {
+  background-color: #27D0B9;
+  border-bottom-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 5px;
+  color: #fff;
+}
+
+.clear_button {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+}
+
+.divBoardHeader {
+  background: #EB524A;
+  text-align: center;
+  color: white;
+  letter-spacing: 10px;
+  padding-top: 1px;
+  padding-bottom: 3px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+nav {
+  margin: 25px;
+}
+
+ul {
+  overflow: auto;
+  list-style-type: none;
+}
+
+li {
+  height: 25px;
+  float: left;
+  margin-right: 0px;
+  border-right: 1px solid #aaa;
+  padding: 0 20px;
+}
+
+li:last-child {
+  border-right: none;
+}
+
+li a {
+  text-decoration: none;
+  color: #ccc;
+  font: 25px/1 Helvetica, Verdana, sans-serif;
+  text-transform: uppercase;
+
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  -ms-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+li a:hover {
+  color: #666;
+}
+
+li.active a {
+  font-weight: bold;
+  color: #333;
+}
+
+.modal-header {
+  background-color: #27D0B9;
+  text-align: center;
+  color: #fff;
+}
+
+.modal-body {
+  text-align: center;
+}
+

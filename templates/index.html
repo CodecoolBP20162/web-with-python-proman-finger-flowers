@@ -1,8 +1,41 @@
-{% extends "layout.html" %}
-{% block body %}
-{{ super() }}
+{% extends "layout.html" %} {% block body %} {{ super() }}
+
 <body>
-<div class="row" id="board"></div>
-<input type="button" id="add_new_board" class="submitbutton" value="Add new Board">
+	<div class="container-fluid">
+		<button class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Create new Board</button>
+		<!-- Modal -->
+		<div class="modal fade" id="myModal" role="dialog">
+			<div class="modal-dialog modal-sm">
+				<!-- Modal content-->
+                <form>
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">New Board</h4>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label for="boardTitle">Board Title:</label>
+
+                            <input type="text" class="form-control" id="boardTitle">
+
+
+						</div>
+					</div>
+					<div class="modal-footer">
+						<center>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+							<button type="submit" id="add_new_board" class="btn btn-success" data-dismiss="modal">Save</button>
+						</center>
+
+					</div>
+				</div>
+			</div>
+             </form>
+		</div>
+		<br>
+		<br>
+		<div class="row divBoard"></div>
+	</div>
 </body>
 {% endblock %}
