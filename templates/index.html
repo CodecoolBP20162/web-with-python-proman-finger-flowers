@@ -3,7 +3,6 @@
 <body>
 <div class="background">
 	<div class="container-fluid">
-		<button class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Create new Board</button>
 		<!-- Modal -->
 		<div class="modal fade" id="myModal" role="dialog">
 			<div class="modal-dialog modal-sm">
@@ -32,7 +31,15 @@
 		</div>
 		<br>
 		<br>
-		<div class="row divBoard"></div>
+		<div class="row divBoard">
+			<div class="col-sm-3">
+				<a href="#">
+					<div class="col-sm-12 board create" data-toggle="modal" data-target="#myModal">
+						<img class="add" src="http://downloadicons.net/sites/default/files/add-icon-76240.png" width="75%" alt="+">
+					</div>
+				</a>
+			</div>
+		</div>
 	</div>
 </div>
 </body>
