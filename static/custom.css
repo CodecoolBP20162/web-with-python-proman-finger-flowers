@@ -64,7 +64,19 @@
   padding-top: 1px;
   padding-bottom: 3px;
 }
-
+footer {
+    text-align: center;
+    background-color: #333333;
+    color: azure;
+    position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+}
+.clear_button {
+    padding-bottom: 3rem;
+}
 * {
   margin: 0;
   padding: 0;
