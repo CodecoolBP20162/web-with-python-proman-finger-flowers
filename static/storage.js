@@ -1,44 +1,144 @@
 $(document).ready(function () {
     var boardList = [];
-    function Board(title) {
+    function Board(title, cardlist = []) {
         this.title = title;
+        this.cardlist = cardlist;
     };
 
-    // LIST BOARDS
-    var list_all_board = function (list_of_boards) {
+    function Card(title,cardtext,status) { //new: +cardtext, +status
+        this.title = title;
+        this.cardtext = cardtext; //kyrka's sh*t
+        this.status = status; //kyrka's sh*t
+
+    }
+
+
+
+
+    // LIST BOARDS /////////////////////////////////////////////////////////////////
+    function listBoards(list_of_boards) {
         for (var oneBoard in list_of_boards) {
-            create_division(list_of_boards[oneBoard].title);
+            createBoard(list_of_boards[oneBoard]);
         }
     };
 
     // ADD NEW BOARD
     $("#add_new_board").click(function () {
-        var board_title = prompt("Board Title: ");
+        var board_title = $("#boardTitle").val();
         var board = new Board(board_title);
+        localStorage.setItem("boardTitle", board_title)
         boardList.push(board);
-        alert(boardList.length);
-        localStorage.setItem("list", JSON.stringify(boardList));
-        create_division(board.title);
+        localStorage.setItem("boardList", JSON.stringify(boardList));
+        createBoard(board);
+        board_title = $("#boardTitle").val("");
     });
 
-    // FUNC. CREATE DIV
-    var create_division = function (item) {
-        $(".row").append("<div class='col-sm-3'><div class='col-sm-12'style='height: 300px; border: solid black;'><h1></h1></div></div>");
-        $("h1:last").html(item);
+    // FUNC. CREATE BOARD DIV
+    function createBoard(item) {
+        $(".divBoard").append(
+            "<div class='col-sm-3'>" +
+            "<a href='/cards' style='color:white'><div class='col-sm-12 board'>" +
+            "<div class='boardTitle'><h1></h1></div>" +
+            "<h2></h2>" +
+            "</div></a></div>");
+        $(".board h1:last").html(item.title);
+        $(".board h2:last").html("cards <span class='label label-success'></span> ");
+        $(".label:last").html(item.cardlist.length);
     }
 
-    // START
+    // LIST CARDS ///////////////////////////////////////////////////////////////
+    function listCards(list_of_cards) {
+        for (var card in list_of_cards) {
+            createCard(list_of_cards[card]);
+        }
+    };
+
+    function getBoardTitle() {
+        $("div.board").click(function () {
+            var title = $(this).find("h1");
+            var innerTitle = title[0].innerHTML;
+            localStorage.setItem("boardTitle", innerTitle)
+        });
+    };
+
+    function detailedBoard() {
+        var innerTitle = localStorage.getItem("boardTitle")
+        $(".divBoardHeader").append("<h1></h1>")
+        $(".divBoardHeader h1:first").html(innerTitle);
+        for (board in boardList) {
+            if (boardList[board].title === innerTitle) {
+                listCards(boardList[board].cardlist)
+            };
+        };
+    };
+
+    // FUNC. CREATE CARD DIV
+    function createCard(item) {
+        $(".divCard").append(
+            "<div class='col-sm-3'>" +
+            "<div class='col-sm-12 card'>" +
+            "<div class='cardTitle'><h1></h1></div>" +
+            "<div><h2></h2></div>" + //k
+            "<div><h3></h3></div>" + //k
+            "</div></div>");
+        $(".card h1:last").html(item.title);
+        $(".card h2:last").html(item.cardtext); //k
+        $(".card h3:last").html(item.status); //k
+    }
+
+
+    // ADD NEW CARD
+    $("#add_new_card").click(function () {
+        var card_title = $("#cardTitle").val();
+        var card_text = $("#cardText").val(); //k
+        var card_status = $("#cardStatus").val(); //k
+        var card = new Card(card_title,card_text,card_status); //new: +card_text, +card_status
+        for (board in boardList) {
+            if (boardList[board].title === localStorage.getItem("boardTitle")) {
+                boardList[board].cardlist.push(card);
+            };
+        };
+        localStorage.setItem("boardList", JSON.stringify(boardList));
+        createCard(card);
+        card_title = $("#cardTitle").val("");
+        card_text = $("#cardText").val(""); //k
+        card_status = $("#cardStatus").val(""); //k
+    });
+
+    // START ///////////////////////////////////////////////////////////////
     var board1 = new Board("board1");
     var board2 = new Board("board2");
-    var loadBoard = JSON.parse(localStorage.getItem("list"));
-    boardList = loadBoard;
-    if (loadBoard.length < 1) {
+    var loadBoard = JSON.parse(localStorage.getItem("boardList"));
+    if (loadBoard) {
+        boardList = loadBoard;
+        listBoards(loadBoard);
+    } else {
         boardList.push(board1);
         boardList.push(board2);
-        localStorage.setItem("list", JSON.stringify(boardList))
+        listBoards(boardList);
+        localStorage.setItem("boardList", JSON.stringify(boardList))
     };
-    list_all_board(loadBoard);
-    alert(loadBoard.length);
-    alert(boardList.length);
-
+    getBoardTitle();
+    detailedBoard();
+    $('.divCard').sortable({
+        update: function (even, ui) {
+            for (board in boardList) {
+                if (boardList[board].title === localStorage.getItem("boardTitle")) {
+                    boardList[board].cardlist = [];
+                };
+            };
+            $('.card').each(function () {
+                var card_title = $(this).find("h1").html();
+                var card_text = $(this).find("h2").html(); //k
+                var card_status = $(this).find("h3").html(); //k
+                var card = new Card(card_title,card_text,card_status); //+card_tex + card_status
+                for (board in boardList) {
+                    if (boardList[board].title === localStorage.getItem("boardTitle")) {
+                        boardList[board].cardlist.push(card);
+                    };
+                };
+            });
+            localStorage.setItem("boardList", JSON.stringify(boardList));
+        }
+    });
 });
