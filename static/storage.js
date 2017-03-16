@@ -107,5 +107,23 @@ $(document).ready(function () {
     };
     getBoardTitle();
     detailedBoard();
-    $('.row').sortable();
+    $('.divCard').sortable({
+        update: function (even, ui) {
+            for (board in boardList) {
+                if (boardList[board].title === localStorage.getItem("boardTitle")) {
+                    boardList[board].cardlist = [];
+                };
+            };
+            $('.card').each(function () {
+                var card_title = $(this).find("h1").html();
+                var card = new Card(card_title);
+                for (board in boardList) {
+                    if (boardList[board].title === localStorage.getItem("boardTitle")) {
+                        boardList[board].cardlist.push(card);
+                    };
+                };
+            });
+            localStorage.setItem("boardList", JSON.stringify(boardList));
+        }
+    });
 });
