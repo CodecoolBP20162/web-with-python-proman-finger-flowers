@@ -99,8 +99,10 @@ $(document).ready(function () {
     });
 
     // START ///////////////////////////////////////////////////////////////
-    var board1 = new Board("board1");
-    var board2 = new Board("board2");
+    var board1 = new Board("I'm a board");
+    var board2 = new Board("Me too ^-^");
+    var board3 = new Board("I'm bored :(")
+    var board4 = new Board("I'm James Board")
     var loadBoard = JSON.parse(localStorage.getItem("boardList"));
     if (loadBoard) {
         boardList = loadBoard;
@@ -108,6 +110,8 @@ $(document).ready(function () {
     } else {
         boardList.push(board1);
         boardList.push(board2);
+        boardList.push(board3);
+        boardList.push(board4);
         listBoards(boardList);
         localStorage.setItem("boardList", JSON.stringify(boardList))
     };
