@@ -12,15 +12,6 @@
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 	<script src="/static/storage.js"></script>
-
-	<nav>
-		<ul>
-			<li><a href="/">Home</a></li>
-			<li class="active"><a href="/funny_dog">Pro Man</a></li>
-			<li><a href="/cards">Detailed board page</a></li>
-		</ul>
-	</nav>
-
 	<script>
     function clear_storage() {
     localStorage.clear();
@@ -29,6 +20,13 @@
 	<button class="clear_button" onclick="clear_storage()">Clear local Storage</button>
 	<footer>© 2017 by FINGER FLOWERS.</footer>
 </head>
+<nav>
+	<ul>
+		<li><a href="/">Home</a></li>
+		<li class="active"><a href="/funny_dog">Pro Man</a></li>
+		<li><a href="/cards">Detailed board page</a></li>
+	</ul>
+</nav>
 {% block body %}{% endblock %}
 
 </html>

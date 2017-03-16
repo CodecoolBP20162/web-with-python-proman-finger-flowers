@@ -1,3 +1,8 @@
+body {
+  background-image: url("https://images.pexels.com/photos/317356/pexels-photo-317356.jpeg?w=940&h=650&auto=compress&cs=tinysrgb");
+  background-size: 100%;
+}
+
 .board {
     height: 200px;
     margin-bottom: 20px;
@@ -105,7 +110,7 @@ li:last-child {
 
 li a {
   text-decoration: none;
-  color: #ccc;
+  color: black;
   font: 25px/1 Helvetica, Verdana, sans-serif;
   text-transform: uppercase;
 
