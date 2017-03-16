@@ -21,6 +21,12 @@
 		</ul>
 	</nav>
 
+<script>
+    function clear_storage() {
+    localStorage.clear();
+}
+</script>
+     <button class="clear_button" onclick="clear_storage()">Clear local Storage</button>
 	{% block body %}{% endblock %}
 </head>
 

@@ -91,7 +91,6 @@ $(document).ready(function () {
         card_title = $("#cardTitle").val("");
     });
 
-
     // START ///////////////////////////////////////////////////////////////
     var board1 = new Board("board1");
     var board2 = new Board("board2");

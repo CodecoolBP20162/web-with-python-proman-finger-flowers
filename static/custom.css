@@ -50,6 +50,12 @@
   color: #fff;
 }
 
+.clear_button {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+}
+
 .divBoardHeader {
   background: #EB524A;
   text-align: center;
