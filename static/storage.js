@@ -7,14 +7,11 @@ $(document).ready(function () {
 
     function Card(title,cardtext,status) { //new: +cardtext, +status
         this.title = title;
-        this.cardtext = cardtext; //kyrka's sh*t
-        this.status = status; //kyrka's sh*t
+        this.cardtext = cardtext;
+        this.status = status;
 
     }
-
-
-
-
+    
     // LIST BOARDS /////////////////////////////////////////////////////////////////
     function listBoards(list_of_boards) {
         for (var oneBoard in list_of_boards) {
