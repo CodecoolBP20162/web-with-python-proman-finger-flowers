@@ -8,24 +8,26 @@
 		<div class="modal fade" id="myModal" role="dialog">
 			<div class="modal-dialog modal-sm">
 				<!-- Modal content-->
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-						<h4 class="modal-title">New Card</h4>
-					</div>
-					<div class="modal-body">
-						<div class="form-group">
-							<label for="boardTitle">Card Title:</label>
-							<input type="text" class="form-control" id="cardTitle">
+				<form>
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">New Card</h4>
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="boardTitle">Card Title:</label>
+								<input type="text" class="form-control" id="cardTitle" autofocus>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<center>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+								<button type="submit" id="add_new_card" class="btn btn-success" data-dismiss="modal">Save</button>
+							</center>
 						</div>
 					</div>
-					<div class="modal-footer">
-						<center>
-							<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-							<button type="button" id="add_new_card" class="btn btn-success" data-dismiss="modal">Save</button>
-						</center>
-					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 		<br>
