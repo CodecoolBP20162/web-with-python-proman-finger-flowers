@@ -5,10 +5,9 @@ $(document).ready(function () {
         this.cardlist = cardlist;
     };
 
-    function Card(title, cardtext, status) {
+    function Card(title, cardtext) {
         this.title = title;
         this.cardtext = cardtext;
-        this.status = status;
     }
 
     // LIST BOARDS /////////////////////////////////////////////////////////////////
@@ -75,11 +74,9 @@ $(document).ready(function () {
             "<div class='col-sm-12 card'>" +
             "<div class='cardTitle'><h1></h1></div>" +
             "<div><h2></h2></div>" +
-            "<div><h3></h3></div>" +
             "</div></div>");
         $(".card h1:last").html(item.title);
         $(".card h2:last").html(item.cardtext);
-        $(".card h3:last").html(item.status);
 
     }
 
@@ -88,8 +85,7 @@ $(document).ready(function () {
     $("#add_new_card").click(function () {
         var card_title = $("#cardTitle").val();
         var card_text = $("#cardText").val();
-        var card_status = $("#cardStatus").val();
-        var card = new Card(card_title, card_text, card_status);
+        var card = new Card(card_title, card_text);
         for (board in boardList) {
             if (boardList[board].title === localStorage.getItem("boardTitle")) {
                 boardList[board].cardlist.push(card);
@@ -99,7 +95,6 @@ $(document).ready(function () {
         createCard(card);
         card_title = $("#cardTitle").val("");
         card_text= $("#cardText").val("");
-        card_status = $("#cardStatus").val("");
 
     });
 
@@ -128,8 +123,7 @@ $(document).ready(function () {
             $('.card').each(function () {
                 var card_title = $(this).find("h1").html();
                 var card_text = $(this).find("h2").html();
-                var card_status= $(this).find("h3").html();
-                var card = new Card(card_title, card_text, card_status);
+                var card = new Card(card_title, card_text);
                 for (board in boardList) {
                     if (boardList[board].title === localStorage.getItem("boardTitle")) {
                         boardList[board].cardlist.push(card);
