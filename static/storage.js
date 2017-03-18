@@ -45,6 +45,7 @@ $(document).ready(function () {
     }
 
     // LIST CARDS ///////////////////////////////////////////////////////////////
+    // SORT BY STATUS
     function listCardsNew(list_of_cards) {
         for (var card in list_of_cards) {
             createCard("#new", list_of_cards[card]);
@@ -68,7 +69,7 @@ $(document).ready(function () {
             createCard("#done", list_of_cards[card]);
         }
     };
-    // END LIST CARDS
+    // END SORT BY STATUS
     function getBoardTitle() {
         $("div.board").click(function () {
             var title = $(this).find("h1");
@@ -120,7 +121,7 @@ $(document).ready(function () {
         card_text = $("#cardText").val("");
 
     });
-    // UPDATE
+    // UPDATE ON DROP
     function updateStatus(statusId) {
         $(statusId).children(".card").each(function () {
             var card_title = $(this).find("h1").html();
@@ -141,7 +142,30 @@ $(document).ready(function () {
             };
         });
     };
-
+    // SORTABLE function
+    function sortableDiv() {
+        $('.column').sortable({
+            update: function (even, ui) {
+                for (board in boardList) {
+                    if (boardList[board].title === localStorage.getItem("boardTitle")) {
+                        boardList[board].newCards = [];
+                        boardList[board].inProgress = [];
+                        boardList[board].review = [];
+                        boardList[board].done = [];
+                    };
+                };
+                // ITERATE THROUGH 4 STATUS
+                updateStatus("#new");
+                updateStatus("#in-progress");
+                updateStatus("#review");
+                updateStatus("#done");
+                // SAVE
+                localStorage.setItem("boardList", JSON.stringify(boardList));
+            },
+            connectWith: ".column",
+            dropOnEmpty: true
+        });
+    };
 
     // START ///////////////////////////////////////////////////////////////
     var board1 = new Board("I'm a board");
@@ -162,25 +186,5 @@ $(document).ready(function () {
     };
     getBoardTitle();
     detailedBoard();
-    $('.column').sortable({
-        update: function (even, ui) {
-            for (board in boardList) {
-                if (boardList[board].title === localStorage.getItem("boardTitle")) {
-                    boardList[board].newCards = [];
-                    boardList[board].inProgress = [];
-                    boardList[board].review = [];
-                    boardList[board].done = [];
-                };
-            };
-            // ITERATE THROUGH 4 STATUS
-            updateStatus("#new");
-            updateStatus("#in-progress");
-            updateStatus("#review");
-            updateStatus("#done");
-            // SAVE
-            localStorage.setItem("boardList", JSON.stringify(boardList));
-        },
-        connectWith: ".column",
-        dropOnEmpty: true
-    });
+    sortableDiv();
 });
