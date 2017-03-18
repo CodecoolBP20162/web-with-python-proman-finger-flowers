@@ -193,18 +193,37 @@ img.add {
     bottom: 0;
 }
 
+#statusTitle {
+  color: #fff;
+  text-align: center;
+  margin-top: -30px;
+}
+
+#statusNew {
+  background: rgba(255, 167, 5, 0.8);
+}
+
+#statusInP {
+  background: linear-gradient(to right,rgba(255, 167, 5, 0.8), rgba(255, 254, 17, 0.8));
+}
+
+#statusReview {
+  background: linear-gradient(to right, rgba(255, 254, 17, 0.8), rgba(16, 255, 52, 0.8));
+}
+
+#statusDone {
+  background: rgba(16, 255, 52, 0.8)
+}
+
 .column {
-  min-height: 200px;
+  min-height: 300px;
 }
 
 #in-progress {
-  background: yellow;
 }
 
 #review {
-  background: pink;
 }
 
 #done {
-  background: mediumseagreen;
 }

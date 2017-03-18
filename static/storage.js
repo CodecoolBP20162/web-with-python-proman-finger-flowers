@@ -41,7 +41,7 @@ $(document).ready(function () {
             "</div></a></div>");
         $(".board h1:last").html(item.title);
         $(".board h2:last").html("cards <span class='label label-success'></span> ");
-        $(".label:last").html(item.newCards.length);
+        $(".label:last").html(item.newCards.length + item.inProgress.length + item.review.length + item.done.length);
     }
 
     // LIST CARDS ///////////////////////////////////////////////////////////////
