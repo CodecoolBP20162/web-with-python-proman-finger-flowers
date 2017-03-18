@@ -48,7 +48,7 @@ body {
 }
 
 .card {
-    height: 200px;
+    height: 150px;
     margin-bottom: 20px;
     border-bottom-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -191,4 +191,20 @@ img.add {
     left: 0;
     right: 0;
     bottom: 0;
+}
+
+.column {
+  min-height: 200px;
+}
+
+#in-progress {
+  background: yellow;
+}
+
+#review {
+  background: pink;
+}
+
+#done {
+  background: mediumseagreen;
 }
