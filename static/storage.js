@@ -1,3 +1,24 @@
+/////////// DEFINE AN XML OBJECT DEFINING FUNCTION, SPECIFIC TO TASK /////////////////////
+
+function cardToDatabase(card_title, card_text) {
+
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/save_card_to_database_from_js');
+    xhr.setRequestHeader('Content-Type', 'application/json');
+    xhr.onload = function () {
+        if (xhr.status === 200) {
+            var userInfo = JSON.parse(xhr.responseText.valueOf());
+            console.log(userInfo);
+            $('#cardTitle').val(userInfo['cardTitle']);
+            $('#cardText').val(userInfo['cardText']);
+        }
+
+    };
+    xhr.send(JSON.stringify({"cardTitle": card_title, "cardText": card_text}));}
+
+///////////////// DOCUMENT READY STARTS ///////////////////////////////////////////////////
+
 $(document).ready(function () {
     var boardList = [];
     function Board(title, newCards = [], inProgress = [], review = [], done = []) {
@@ -117,6 +138,7 @@ $(document).ready(function () {
         };
         localStorage.setItem("boardList", JSON.stringify(boardList));
         createCard("#new", card);
+        cardToDatabase(card.title, card.cardtext); //kyrka's 'gányolás'
         card_title = $("#cardTitle").val("");
         card_text = $("#cardText").val("");
 
