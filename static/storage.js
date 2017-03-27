@@ -1,12 +1,16 @@
 $(document).ready(function () {
     var boardList = [];
-    function Board(title, cardlist = []) {
+    function Board(title, newCards = [], inProgress = [], review = [], done = []) {
         this.title = title;
-        this.cardlist = cardlist;
+        this.newCards = newCards;
+        this.inProgress = inProgress;
+        this.review = review;
+        this.done = done;
     };
 
-    function Card(title) {
+    function Card(title, cardtext) {
         this.title = title;
+        this.cardtext = cardtext;
     }
 
     // LIST BOARDS /////////////////////////////////////////////////////////////////
@@ -37,16 +41,35 @@ $(document).ready(function () {
             "</div></a></div>");
         $(".board h1:last").html(item.title);
         $(".board h2:last").html("cards <span class='label label-success'></span> ");
-        $(".label:last").html(item.cardlist.length);
+        $(".label:last").html(item.newCards.length + item.inProgress.length + item.review.length + item.done.length);
     }
 
     // LIST CARDS ///////////////////////////////////////////////////////////////
-    function listCards(list_of_cards) {
+    // SORT BY STATUS
+    function listCardsNew(list_of_cards) {
         for (var card in list_of_cards) {
-            createCard(list_of_cards[card]);
+            createCard("#new", list_of_cards[card]);
         }
     };
 
+    function listCardsInP(list_of_cards) {
+        for (var card in list_of_cards) {
+            createCard("#in-progress", list_of_cards[card]);
+        }
+    };
+
+    function listCardsReview(list_of_cards) {
+        for (var card in list_of_cards) {
+            createCard("#review", list_of_cards[card]);
+        }
+    };
+
+    function listCardsDone(list_of_cards) {
+        for (var card in list_of_cards) {
+            createCard("#done", list_of_cards[card]);
+        }
+    };
+    // END SORT BY STATUS
     function getBoardTitle() {
         $("div.board").click(function () {
             var title = $(this).find("h1");
@@ -61,39 +84,94 @@ $(document).ready(function () {
         $(".divBoardHeader h1:first").html(innerTitle);
         for (board in boardList) {
             if (boardList[board].title === innerTitle) {
-                listCards(boardList[board].cardlist)
+                listCardsNew(boardList[board].newCards);
+                listCardsInP(boardList[board].inProgress);
+                listCardsReview(boardList[board].review);
+                listCardsDone(boardList[board].done);
             };
         };
     };
 
     // FUNC. CREATE CARD DIV
-    function createCard(item) {
-        $(".divCard").append(
-            "<div class='col-sm-3'>" +
-            "<div class='col-sm-12 card'>" +
+    function createCard(divId, item) {
+        $(divId).append(
+            "<div class='card'>" +
             "<div class='cardTitle'><h1></h1></div>" +
-            "</div></div>");
-        $(".card h1:last").html(item.title);
+            "<div><h2></h2></div>" +
+            "</div>");
+        $(divId).find(".card h1:last").html(item.title);
+        $(divId).find(".card h2:last").html(item.cardtext);
+
     }
 
 
     // ADD NEW CARD
     $("#add_new_card").click(function () {
         var card_title = $("#cardTitle").val();
-        var card = new Card(card_title);
+        var card_text = $("#cardText").val();
+        var card = new Card(card_title, card_text);
         for (board in boardList) {
             if (boardList[board].title === localStorage.getItem("boardTitle")) {
-                boardList[board].cardlist.push(card);
+                boardList[board].newCards.push(card);
             };
         };
         localStorage.setItem("boardList", JSON.stringify(boardList));
-        createCard(card);
+        createCard("#new", card);
         card_title = $("#cardTitle").val("");
+        card_text = $("#cardText").val("");
+
     });
+    // UPDATE ON DROP
+    function updateStatus(statusId) {
+        $(statusId).children(".card").each(function () {
+            var card_title = $(this).find("h1").html();
+            var card_text = $(this).find("h2").html();
+            var card = new Card(card_title, card_text);
+            for (board in boardList) {
+                if (boardList[board].title === localStorage.getItem("boardTitle")) {
+                    if (statusId === "#new") {
+                        boardList[board].newCards.push(card);
+                    } else if (statusId === "#in-progress") {
+                        boardList[board].inProgress.push(card);
+                    } else if (statusId === "#review") {
+                        boardList[board].review.push(card);
+                    } else {
+                        boardList[board].done.push(card);
+                    };
+                };
+            };
+        });
+    };
+    // SORTABLE function
+    function sortableDiv() {
+        $('.column').sortable({
+            update: function (even, ui) {
+                for (board in boardList) {
+                    if (boardList[board].title === localStorage.getItem("boardTitle")) {
+                        boardList[board].newCards = [];
+                        boardList[board].inProgress = [];
+                        boardList[board].review = [];
+                        boardList[board].done = [];
+                    };
+                };
+                // ITERATE THROUGH 4 STATUS
+                updateStatus("#new");
+                updateStatus("#in-progress");
+                updateStatus("#review");
+                updateStatus("#done");
+                // SAVE
+                localStorage.setItem("boardList", JSON.stringify(boardList));
+            },
+            connectWith: ".column",
+            dropOnEmpty: true
+        });
+    };
 
     // START ///////////////////////////////////////////////////////////////
-    var board1 = new Board("board1");
-    var board2 = new Board("board2");
+    var board1 = new Board("I'm a board");
+    var board2 = new Board("Me too ^-^");
+    var board3 = new Board("I'm bored :(")
+    var board4 = new Board("I'm James Board")
     var loadBoard = JSON.parse(localStorage.getItem("boardList"));
     if (loadBoard) {
         boardList = loadBoard;
@@ -101,28 +179,12 @@ $(document).ready(function () {
     } else {
         boardList.push(board1);
         boardList.push(board2);
+        boardList.push(board3);
+        boardList.push(board4);
         listBoards(boardList);
         localStorage.setItem("boardList", JSON.stringify(boardList))
     };
     getBoardTitle();
     detailedBoard();
-    $('.divCard').sortable({
-        update: function (even, ui) {
-            for (board in boardList) {
-                if (boardList[board].title === localStorage.getItem("boardTitle")) {
-                    boardList[board].cardlist = [];
-                };
-            };
-            $('.card').each(function () {
-                var card_title = $(this).find("h1").html();
-                var card = new Card(card_title);
-                for (board in boardList) {
-                    if (boardList[board].title === localStorage.getItem("boardTitle")) {
-                        boardList[board].cardlist.push(card);
-                    };
-                };
-            });
-            localStorage.setItem("boardList", JSON.stringify(boardList));
-        }
-    });
+    sortableDiv();
 });
