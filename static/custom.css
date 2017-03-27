@@ -1,6 +1,6 @@
 footer {
     text-align: center;
-    background-color: #333333;
+    background-color: #303030;
     color: azure;
     position: absolute;
   right: 0;
@@ -22,14 +22,14 @@ body {
     border-top-right-radius: 20px;
     background: #F5F5F5;
     box-shadow: 3px 3px 5px #303030;
-    color: #432E41;
+    color: #401834;
     text-align: center;
     opacity: 0.8
 }
 
 .board:hover, .card:hover {
   transition: 0.5s;
-  opacity: 1;
+  opacity: 0.9;
   border-radius: 40px;
 }
 
@@ -37,18 +37,18 @@ body {
   color: #fff;
   border-bottom-left-radius: 20px;
   border-top-right-radius: 20px;
-  background-color: #EB524A;
+  background-color: #7F3068;
   padding: 5px;
 }
 
 .label-success {
-  background-color: #EB524A;
+  background-color: #401B39;
   color: #fff;
   border-radius: 180px;
 }
 
 .card {
-    height: 200px;
+    height: 150px;
     margin-bottom: 20px;
     border-bottom-left-radius: 20px;
     border-top-right-radius: 20px;
@@ -60,12 +60,30 @@ body {
 }
 
 .cardTitle {
-  background-color: #27D0B9;
+  background-color: #EB70C8;
   border-bottom-left-radius: 20px;
   border-top-right-radius: 20px;
   padding: 5px;
   color: #fff;
 }
+.boardTitle h1, .cardTitle h1 {
+    font-family: 'PT Serif', serif;
+}
+
+.cardDebug {
+    background-color: #7E3C6B;
+    text-align: center;
+    text-align: center;
+    color: white;
+    opacity: 0.8;
+    margin-left: 60px;
+    margin-top: 45px;
+    border-radius: 20px;
+    padding: 10px;
+    font-family: 'PT Serif', serif;
+    font-size: 40px;
+}
+
 
 .clear_button {
     position: fixed;
@@ -74,16 +92,25 @@ body {
 }
 
 .divBoardHeader {
-  background: #EB524A;
+  background: #743068;
   text-align: center;
   color: white;
   letter-spacing: 10px;
   padding-top: 1px;
   padding-bottom: 3px;
+    opacity: 0.9;
 }
 
 .clear_button {
     padding-bottom: 3rem;
+    border-radius: 20px;
+    color: transparent;
+    background-color: transparent;
+    font-family: Helvetica, Verdana, sans-serif;
+    padding: 5px;
+    bottom: 10%;
+    border: none !important;
+
 }
 
 div.dog {
@@ -103,6 +130,7 @@ nav {
 }
 
 ul {
+    height: 26px;
   overflow: auto;
   list-style-type: none;
 }
@@ -121,7 +149,7 @@ li:last-child {
 
 li a {
   text-decoration: none;
-  color: #ccc;
+  color: black;
   font: 25px/1 Helvetica, Verdana, sans-serif;
   text-transform: uppercase;
 
@@ -133,12 +161,13 @@ li a {
 }
 
 li a:hover {
-  color: #666;
+  color: white;
+    font-weight: bold;
 }
 
 li.active a {
   font-weight: bold;
-  color: #333;
+  color: white;
 }
 
 .modal-header {
@@ -162,4 +191,40 @@ img.add {
     left: 0;
     right: 0;
     bottom: 0;
+}
+
+#statusTitle {
+  color: #fff;
+  text-align: center;
+  margin-top: -30px;
+  margin-bottom: 10px;
+}
+
+#statusNew {
+  background: rgba(255, 167, 5, 0.8);
+}
+
+#statusInP {
+  background: linear-gradient(to right,rgba(255, 167, 5, 0.8), rgba(255, 254, 17, 0.8));
+}
+
+#statusReview {
+  background: linear-gradient(to right, rgba(255, 254, 17, 0.8), rgba(16, 255, 52, 0.8));
+}
+
+#statusDone {
+  background: rgba(16, 255, 52, 0.8)
+}
+
+.column {
+  min-height: 300px;
+}
+
+#in-progress {
+}
+
+#review {
+}
+
+#done {
 }
