@@ -120,6 +120,7 @@ div.dog {
   margin-top: -120px;
   margin-left: -140px;
 }
+
 * {
   margin: 0;
   padding: 0;
@@ -149,7 +150,7 @@ li:last-child {
 
 li a {
   text-decoration: none;
-  color: black;
+  color: #ccc;
   font: 25px/1 Helvetica, Verdana, sans-serif;
   text-transform: uppercase;
 
