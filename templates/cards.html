@@ -2,7 +2,7 @@
 
 <body>
 	<div class="container-fluid">
-		<div class='divBoardHeader'></div>
+		<div class='row divBoardHeader'></div>
 		<!-- Modal -->
 		<div class="modal fade" id="myModal2" role="dialog">
 			<div class="modal-dialog modal-sm">
@@ -19,9 +19,9 @@
 								<input type="text" class="form-control" id="cardTitle" autofocus>
 							</div>
 							<div class="form-group">
-                            	<label for="cardText">Card Text:</label>
-                            	<input type="text" class="form-control" id="cardText" autofocus>
-                        	</div>
+								<label for="cardText">Card Text:</label>
+								<input type="text" class="form-control" id="cardText" autofocus>
+							</div>
 						</div>
 						<div class="modal-footer">
 							<center>
@@ -35,13 +35,33 @@
 		</div>
 		<br>
 		<br>
+		<div class="row" id="statusTitle">
+			<div class="col-sm-3" id="statusNew">
+				<h3>NEW</h3>
+			</div>
+			<div class="col-sm-3" id="statusInP">
+				<h3>IN PROGRESS</h3>
+			</div>
+			<div class="col-sm-3" id="statusReview">
+				<h3>REVIEW</h3>
+			</div>
+			<div class="col-sm-3" id="statusDone">
+				<h3>DONE</h3>
+			</div>
+		</div>
 		<div class="row divCard">
-			<div class="col-sm-3">
+			<div class="col-sm-3 column" id="new">
 				<a href="#">
-					<div class="col-sm-12 board create" data-toggle="modal" data-target="#myModal2">
-						<img class="add" src="http://downloadicons.net/sites/default/files/add-icon-76240.png" width="75%" alt="+">
+					<div class="card create" data-toggle="modal" data-target="#myModal2" style="position: relative;">
+						<img class="add" src="http://downloadicons.net/sites/default/files/add-icon-76240.png" height="75%" alt="+">
 					</div>
 				</a>
+			</div>
+			<div class="col-sm-3 column" id="in-progress">
+			</div>
+			<div class="col-sm-3 column" id="review">
+			</div>
+			<div class="col-sm-3 column" id="done">
 			</div>
 		</div>
 	</div>
