@@ -31,6 +31,7 @@ $(document).ready(function () {
         card_title = $("#cardTitle").val("");
         card_text = $("#cardText").val("");
     });
+
     // UPDATE ON DROP
     function updateStatus(statusId) {
         var position = 0
