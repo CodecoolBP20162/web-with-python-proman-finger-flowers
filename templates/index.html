@@ -41,7 +41,7 @@
 			{% for board in boards %}
 			<div class="col-sm-3">
 				<a href='/{{board.id}}' class="boardLink" data-boardId="{{board.id}}" style='color:white'>
-					<div class='col-sm-12 board'>
+					<div class='col-sm-12 board' id={{board.id}}>
 						<div class='boardTitle'>
 							<h1>{{board.title}}</h1>
 						</div>
