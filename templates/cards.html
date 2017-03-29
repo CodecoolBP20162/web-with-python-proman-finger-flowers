@@ -59,7 +59,7 @@
 				{% for card in cards_new %}
 				<div class='card'>
 					<div class='cardTitle'>
-						<h1 id="{{card.id}}" data-boardId="{{board_id}}">{{card.title}}</h1>
+						<h1 id="{{card.id}}" data-boardId="{{board_id}}" data-position="{{card.position}}">{{card.title}}</h1>
 					</div>
 					<div>
 						<h2>{{card.text}}</h2>
@@ -71,7 +71,7 @@
 				{% for card in cards_in_progress %}
 				<div class='card'>
 					<div class='cardTitle'>
-						<h1 id="{{card.id}}" data-boardId="{{board_id}}">{{card.title}}</h1>
+						<h1 id="{{card.id}}" data-boardId="{{board_id}}" data-position="{{card.position}}">{{card.title}}</h1>
 					</div>
 					<div>
 						<h2>{{card.text}}</h2>
@@ -83,7 +83,7 @@
 				{% for card in cards_review %}
 				<div class='card'>
 					<div class='cardTitle'>
-						<h1 id="{{card.id}}" data-boardId="{{board_id}}">{{card.title}}</h1>
+						<h1 id="{{card.id}}" data-boardId="{{board_id}}" data-position="{{card.position}}">{{card.title}}</h1>
 					</div>
 					<div>
 						<h2>{{card.text}}</h2>
@@ -95,7 +95,7 @@
 				{% for card in cards_done %}
 				<div class='card'>
 					<div class='cardTitle'>
-						<h1 id="{{card.id}}" data-boardId="{{board_id}}">{{card.title}}</h1>
+						<h1 id="{{card.id}}" data-boardId="{{board_id}}" data-position="{{card.position}}">{{card.title}}</h1>
 					</div>
 					<div>
 						<h2>{{card.text}}</h2>

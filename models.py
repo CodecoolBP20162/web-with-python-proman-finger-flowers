@@ -17,3 +17,4 @@ class Card(BaseModel):
     text = TextField(null=True)
     board = ForeignKeyField(Board)
     status = CharField(null=True)
+    position = IntegerField(null=True)
