@@ -66,6 +66,20 @@ $(document).ready(function () {
         });
     };
 
+    //COUNT CARDS
+    $(".board").each(function () {
+        var boardId = $(this).prop('id');
+        var link = '/' + boardId + '/counter'
+        $.ajax({
+            url: link,
+            success: function (data) {
+                var count = JSON.parse(data);
+                $('#' + boardId).find('span').text(count['cards']);
+            },
+            type: 'GET'
+        })
+    })
+
     // START ///////////////////////////////////////////////////////////////
     sortableDiv();
 });

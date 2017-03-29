@@ -23,6 +23,15 @@ def cards(board_id):
     cards_review=cards_review, cards_done=cards_done)
 
 
+@app.route('/<board_id>/counter', methods=['GET'])
+def count_cards(board_id):
+    counter = 0
+    cards = Card.select().where(Card.board == board_id)
+    for card in cards:
+        counter += 1
+    return json.dumps({'cards': counter})
+
+
 @app.route('/funny_dog', methods=['GET'])
 def show_detailed_board_page():
     return render_template("funny_dog.html")
