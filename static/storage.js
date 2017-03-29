@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    // CREATE CARD DIV
+    // FUNC. CREATE CARD DIV
     function createCard(divId, title, text) {
         $(divId).append(
             "<div class='card'>" +
@@ -8,9 +8,10 @@ $(document).ready(function () {
             "</div>");
         $(divId).find(".card h1:last").html(title);
         $(divId).find(".card h2:last").html(text);
-    };
 
-    // ADD NEW CARD AJAX
+    }
+
+    // ADD NEW CARD
     $("#add_new_card").click(function () {
         var card_title = $("#cardTitle").val();
         var card_text = $("#cardText").val();
@@ -33,11 +34,11 @@ $(document).ready(function () {
             },
             type: 'GET'
         })
+        location.reload();
         card_title = $("#cardTitle").val("");
         card_text = $("#cardText").val("");
-
     });
-    // UPDATE STATUS
+    // UPDATE ON DROP
     function updateStatus(statusId) {
         $(statusId).children(".card").each(function () {
             var board_id = $(this).find("h1").attr('data-boardId');
@@ -46,8 +47,15 @@ $(document).ready(function () {
             var card_text = $(this).find("h2").html();
             var status = statusId.replace('#', '');
             var link = '/' + board_id + '/' + card_id + '/' + card_title + '/' + card_text + '/' + status;
+            alert(link);
             $.ajax({
                 url: link,
+                error: function () {
+                    alert('error')
+                },
+                success: function (data) {
+                    alert('SUCCES UPDATE')
+                },
                 type: 'GET'
             })
         });

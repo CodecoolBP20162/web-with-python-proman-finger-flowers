@@ -12,7 +12,6 @@ def listing():
     boards = Board.select()
     return render_template("index.html", boards=boards)
 
-
 @app.route('/<board_id>')
 def cards(board_id):
     cards_new = Card.select().where(Card.board == board_id, Card.status == "new").order_by(Card.id)
