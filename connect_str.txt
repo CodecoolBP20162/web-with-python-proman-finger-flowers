@@ -1,1 +1,2 @@
-arinyu
+postgres
+DATABASE_URL
