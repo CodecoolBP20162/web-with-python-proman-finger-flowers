@@ -2,7 +2,7 @@
 
 <body>
 	<div class="container-fluid">
-		<div class='divBoardHeader'></div>
+		<div class='row divBoardHeader_card'></div>
 		<!-- Modal -->
 		<div class="modal fade" id="myModal2" role="dialog">
 			<div class="modal-dialog modal-sm">
@@ -19,29 +19,145 @@
 								<input type="text" class="form-control" id="cardTitle" autofocus>
 							</div>
 							<div class="form-group">
-                            	<label for="cardText">Card Text:</label>
-                            	<input type="text" class="form-control" id="cardText" autofocus>
-                        	</div>
+								<label for="cardText">Card Text:</label>
+								<input type="text" class="form-control" id="cardText" autofocus>
+							</div>
 						</div>
 						<div class="modal-footer">
 							<center>
 								<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-								<button type="submit" id="add_new_card" class="btn btn-success" data-dismiss="modal">Save</button>
+								<button type="submit" id="add_new_card" class="btn btn-success" data-boardId="{{board_id}}" data-dismiss="modal">Save</button>
 							</center>
 						</div>
 					</div>
 				</form>
 			</div>
 		</div>
-		<br>
-		<br>
-		<div class="row divCard">
-			<div class="col-sm-3">
-				<a href="#">
-					<div class="col-sm-12 board create" data-toggle="modal" data-target="#myModal2">
-						<img class="add" src="http://downloadicons.net/sites/default/files/add-icon-76240.png" width="75%" alt="+">
+		<!-- END Modal -->
+		<!-- Modal Edit -->
+		<div class="modal fade" id="myModalEdit" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content-->
+				<form>
+					<div class="modal-content">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Edit Card</h4>
+							<input id="cardIdModal" name="cardIdModal" type="text" disabled style="opacity:0">
+						</div>
+						<div class="modal-body">
+							<div class="form-group">
+								<label for="editCardTitle">Card Title:</label>
+								<input type="text" name="editCardTitle" class="form-control" id="editCardTitle" autofocus>
+							</div>
+							<div class="form-group">
+								<label for="editCardText">Card Text:</label>
+								<input type="text" name="editCardText" class="form-control" id="editCardText" autofocus>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<center>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+								<button type="submit" id="edit_card" class="btn btn-success" data-boardId="{{board_id}}" data-dismiss="modal">Update</button>
+							</center>
+						</div>
 					</div>
-				</a>
+				</form>
+			</div>
+		</div>
+		<!-- END Modal -->
+		<br>
+		<br>
+		<div class="row" id="statusTitle">
+			<div class="col-sm-3" id="statusNew">
+				<h3>NEW</h3>
+			</div>
+			<div class="col-sm-3" id="statusInP">
+				<h3>IN PROGRESS</h3>
+			</div>
+			<div class="col-sm-3" id="statusReview">
+				<h3>REVIEW</h3>
+			</div>
+			<div class="col-sm-3" id="statusDone">
+				<h3>DONE</h3>
+			</div>
+		</div>
+		<div class="row divCard">
+			<div class="col-sm-3 column" id="new">
+				<a href="#">
+					<div class="card create" data-toggle="modal" data-target="#myModal2" style="position: relative;">
+						<img class="add" src="http://downloadicons.net/sites/default/files/add-icon-76240.png" height="75%" alt="+">
+					</div>
+				</a> {% for card in cards_new %}
+				<div class='card'>
+					<div class='cardTitle'>
+						<h1 id="{{card.id}}" data-boardId="{{board_id}}" data-position="{{card.position}}">{{card.title}}</h1>
+					</div>
+					<div>
+						<h2>{{card.text}}</h2>
+					</div>
+					<div class="edit">
+						<center>
+							<a href="/{{board_id}}/delete/{{card.id}}" class="btn btn-danger btn-sm">Delete</a>
+							<button class="btn btn-info btn-sm edit" data-toggle="modal" data-target="#myModalEdit" data-cardId={{card.id}}>Edit</button>
+						</center>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			<div class="col-sm-3 column" id="in_progress">
+				{% for card in cards_in_progress %}
+				<div class='card'>
+					<div class='cardTitle'>
+						<h1 id="{{card.id}}" data-boardId="{{board_id}}" data-position="{{card.position}}">{{card.title}}</h1>
+					</div>
+					<div>
+						<h2>{{card.text}}</h2>
+					</div>
+					<div class="edit">
+						<center>
+							<a href="/{{board_id}}/delete/{{card.id}}" class="btn btn-danger btn-sm">Delete</a>
+							<button class="btn btn-info btn-sm edit" data-toggle="modal" data-target="#myModalEdit" data-cardId={{card.id}}>Edit</button>
+						</center>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			<div class="col-sm-3 column" id="review">
+				{% for card in cards_review %}
+				<div class='card'>
+					<div class='cardTitle'>
+						<h1 id="{{card.id}}" data-boardId="{{board_id}}" data-position="{{card.position}}">{{card.title}}</h1>
+					</div>
+					<div>
+						<h2>{{card.text}}</h2>
+					</div>
+					<div class="edit">
+						<center>
+							<a href="/{{board_id}}/delete/{{card.id}}" class="btn btn-danger btn-sm">Delete</a>
+							<button class="btn btn-info btn-sm edit" data-toggle="modal" data-target="#myModalEdit" data-cardId={{card.id}}>Edit</button>
+						</center>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+			<div class="col-sm-3 column" id="done">
+				{% for card in cards_done %}
+				<div class='card'>
+					<div class='cardTitle'>
+						<h1 id="{{card.id}}" data-boardId="{{board_id}}" data-position="{{card.position}}">{{card.title}}</h1>
+					</div>
+					<div>
+						<h2>{{card.text}}</h2>
+					</div>
+					<div class="edit">
+						<center>
+							<a href="/{{board_id}}/delete/{{card.id}}" class="btn btn-danger btn-sm">Delete</a>
+							<button class="btn btn-info btn-sm edit" data-toggle="modal" data-target="#myModalEdit" data-cardId={{card.id}}>Edit</button>
+						</center>
+					</div>
+				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</div>

@@ -7,21 +7,13 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Pro Man</title>
 	<link rel="stylesheet" href="https://bootswatch.com/flatly/bootstrap.min.css">
+	<link rel="shortcut icon" href="#" />
 	<link rel="stylesheet" href="/static/custom.css">
-<link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=PT+Serif" rel="stylesheet">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 	<script src="/static/storage.js"></script>
-
-	<nav>
-		<ul>
-			<li><a href="/">Home</a></li>
-			<li class="active"><a href="/funny_dog">Pro Man</a></li>
-			<li><a href="/cards">Detailed board page</a></li>
-		</ul>
-	</nav>
-
 	<script>
     function clear_storage() {
     localStorage.clear();
@@ -30,6 +22,13 @@
 	<button class="clear_button" onclick="clear_storage()">Clear local Storage</button>
 	<footer>© 2017 by FINGER FLOWERS.</footer>
 </head>
+<nav>
+	<ul>
+		<li><a href="/">Home</a></li>
+		<li class="active"><a href="/funny_dog">Pro Man</a></li>
+		<!--<li><a href="/cards">Detailed board page</a></li>-->
+	</ul>
+</nav>
 {% block body %}{% endblock %}
 
 </html>

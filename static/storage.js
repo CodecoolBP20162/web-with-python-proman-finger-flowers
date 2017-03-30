@@ -1,140 +1,121 @@
 $(document).ready(function () {
-    var boardList = [];
-    function Board(title, cardlist = []) {
-        this.title = title;
-        this.cardlist = cardlist;
+    // CREATE CARD DIV
+    function createCard(divId, title, text, boardId) {
+        $(divId).after(
+            "<div class='card'>" +
+            "<div class='cardTitle'>" +
+            "<h1 data-boardId=" + "'" + boardId + "'" + " data-position=0>" + title + "</h1></div>" +
+            "<div><h2>" + text + "</h2></div>" +
+            "</div>");
     };
 
-    function Card(title, cardtext) {
-        this.title = title;
-        this.cardtext = cardtext;
-    }
-
-    // LIST BOARDS /////////////////////////////////////////////////////////////////
-    function listBoards(list_of_boards) {
-        for (var oneBoard in list_of_boards) {
-            createBoard(list_of_boards[oneBoard]);
-        }
-    };
-
-    // ADD NEW BOARD
-    $("#add_new_board").click(function () {
-        var board_title = $("#boardTitle").val();
-        var board = new Board(board_title);
-        localStorage.setItem("boardTitle", board_title)
-        boardList.push(board);
-        localStorage.setItem("boardList", JSON.stringify(boardList));
-        createBoard(board);
-        board_title = $("#boardTitle").val("");
-    });
-
-    // FUNC. CREATE BOARD DIV
-    function createBoard(item) {
-        $(".divBoard").append(
-            "<div class='col-sm-3'>" +
-            "<a href='/cards' style='color:white'><div class='col-sm-12 board'>" +
-            "<div class='boardTitle'><h1></h1></div>" +
-            "<h2></h2>" +
-            "</div></a></div>");
-        $(".board h1:last").html(item.title);
-        $(".board h2:last").html("cards <span class='label label-success'></span> ");
-        $(".label:last").html(item.cardlist.length);
-    }
-
-    // LIST CARDS ///////////////////////////////////////////////////////////////
-    function listCards(list_of_cards) {
-        for (var card in list_of_cards) {
-            createCard(list_of_cards[card]);
-        }
-    };
-
-    function getBoardTitle() {
-        $("div.board").click(function () {
-            var title = $(this).find("h1");
-            var innerTitle = title[0].innerHTML;
-            localStorage.setItem("boardTitle", innerTitle)
-        });
-    };
-
-    function detailedBoard() {
-        var innerTitle = localStorage.getItem("boardTitle")
-        $(".divBoardHeader").append("<h1></h1>")
-        $(".divBoardHeader h1:first").html(innerTitle);
-        for (board in boardList) {
-            if (boardList[board].title === innerTitle) {
-                listCards(boardList[board].cardlist)
-            };
-        };
-    };
-
-    // FUNC. CREATE CARD DIV
-    function createCard(item) {
-        $(".divCard").append(
-            "<div class='col-sm-3'>" +
-            "<div class='col-sm-12 card'>" +
-            "<div class='cardTitle'><h1></h1></div>" +
-            "<div><h2></h2></div>" +
-            "</div></div>");
-        $(".card h1:last").html(item.title);
-        $(".card h2:last").html(item.cardtext);
-
-    }
-
-
-    // ADD NEW CARD
+    // ADD NEW CARD TO TABLE
     $("#add_new_card").click(function () {
         var card_title = $("#cardTitle").val();
         var card_text = $("#cardText").val();
-        var card = new Card(card_title, card_text);
-        for (board in boardList) {
-            if (boardList[board].title === localStorage.getItem("boardTitle")) {
-                boardList[board].cardlist.push(card);
-            };
+        if (card_title === "") {
+            card_title = "-"
         };
-        localStorage.setItem("boardList", JSON.stringify(boardList));
-        createCard(card);
+        if (card_text === "") {
+            card_text = "-"
+        };
+        var board_id = $(this).attr("data-boardId")
+        createCard("#new a:first-child", card_title, card_text, board_id);
+        $.ajax({
+            url: '/' + board_id + '/' + card_title + '/' + card_text,
+            error: function () {
+                alert('ERROR')
+            },
+            type: 'GET'
+        })
+        location.reload();
         card_title = $("#cardTitle").val("");
-        card_text= $("#cardText").val("");
-
+        card_text = $("#cardText").val("");
     });
 
-    // START ///////////////////////////////////////////////////////////////
-    var board1 = new Board("I'm a board");
-    var board2 = new Board("Me too ^-^");
-    var board3 = new Board("I'm bored :(")
-    var board4 = new Board("I'm James Board")
-    var loadBoard = JSON.parse(localStorage.getItem("boardList"));
-    if (loadBoard) {
-        boardList = loadBoard;
-        listBoards(loadBoard);
-    } else {
-        boardList.push(board1);
-        boardList.push(board2);
-        boardList.push(board3);
-        boardList.push(board4);
-        listBoards(boardList);
-        localStorage.setItem("boardList", JSON.stringify(boardList))
+    // UPDATE ON DROP
+    function updateStatus(statusId) {
+        var position = 0
+        $(statusId).children(".card").each(function () {
+            var board_id = $(this).find("h1").attr('data-boardId');
+            //var card_id = $(this).find("h1").attr('id');
+            var card_title = $(this).find("h1").html();
+            var card_text = $(this).find("h2").html();
+            var status = statusId.replace('#', '');
+            position++;
+            var link = '/' + board_id + '/' + card_title + '/' + card_text + '/' + status + '/' + position;
+            $.ajax({
+                url: link,
+                error: function () {
+                    alert('error')
+                },
+                type: 'GET'
+            })
+        });
     };
-    getBoardTitle();
-    detailedBoard();
-    $('.divCard').sortable({
-        update: function (even, ui) {
-            for (board in boardList) {
-                if (boardList[board].title === localStorage.getItem("boardTitle")) {
-                    boardList[board].cardlist = [];
-                };
-            };
-            $('.card').each(function () {
-                var card_title = $(this).find("h1").html();
-                var card_text = $(this).find("h2").html();
-                var card = new Card(card_title, card_text);
-                for (board in boardList) {
-                    if (boardList[board].title === localStorage.getItem("boardTitle")) {
-                        boardList[board].cardlist.push(card);
-                    };
-                };
-            });
-            localStorage.setItem("boardList", JSON.stringify(boardList));
-        }
-    });
+    // SORTABLE function
+    function sortableDiv() {
+        $('.column').sortable({
+            update: function (even, ui) {
+                updateStatus('#new');
+                updateStatus('#in_progress');
+                updateStatus('#review');
+                updateStatus('#done');
+            },
+            connectWith: ".column",
+            dropOnEmpty: true
+        });
+    };
+
+    //COUNT CARDS
+    $(".board").each(function () {
+        var boardId = $(this).prop('id');
+        var link = '/' + boardId + '/counter'
+        $.ajax({
+            url: link,
+            success: function (data) {
+                var count = JSON.parse(data);
+                $('#' + boardId).find('span').text(count['cards']);
+            },
+            type: 'GET'
+        })
+    })
+    // EDIT MODAL CONTENT
+    $('button.edit').click(function (event) {
+        var button = $(event.currentTarget);
+        var card_id = button.attr('data-cardId')
+        $.ajax({
+            url: '/edit/' + card_id,
+            error: function () {
+                alert('error')
+            },
+            success: function (data) {
+                cardInfo = JSON.parse(data);
+                var title = cardInfo['card_title'];
+                var text = cardInfo['card_text'];
+                $('#editCardTitle').val(title);
+                $('#editCardText').val(text);
+                $('#cardIdModal').val(card_id)
+            }
+        })
+    })
+
+    // UPDATE CARD
+    $('#edit_card').click(function (event) {
+        var card_id = $('form').find('#cardIdModal').val();
+        var card_title = $('form').find('#editCardTitle').val();
+        var card_text = $('form').find('#editCardText').val();
+        var board_id = $(this).attr('data-boardId')
+        $.ajax({
+            url: '/update/' + board_id + '/' + card_id + '/' + card_title + '/' + card_text,
+            error: function () {
+                alert('ERROR')
+            },
+            success: function () {
+                location.reload()
+            }
+        })
+    })
+    // START ///////////////////////////////////////////////////////////////
+    sortableDiv();
 });
