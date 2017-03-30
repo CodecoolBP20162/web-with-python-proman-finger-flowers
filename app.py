@@ -1,10 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, request, json
 from models import *
 from init_database import InitDatabase
-import os
-import psycopg2
-import urllib.parse
-
 
 app = Flask(__name__)
 app.config.from_object(__name__)
