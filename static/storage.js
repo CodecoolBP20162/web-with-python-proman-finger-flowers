@@ -112,7 +112,6 @@ $(document).ready(function () {
                 alert('ERROR')
             },
             success: function () {
-                alert('vuhuuu');
                 location.reload()
             }
         })
