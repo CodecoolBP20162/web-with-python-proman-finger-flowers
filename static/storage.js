@@ -28,6 +28,7 @@ $(document).ready(function () {
             },
             type: 'GET'
         })
+        location.reload();
         card_title = $("#cardTitle").val("");
         card_text = $("#cardText").val("");
     });
@@ -79,7 +80,43 @@ $(document).ready(function () {
             type: 'GET'
         })
     })
+    // EDIT MODAL CONTENT
+    $('button.edit').click(function (event) {
+        var button = $(event.currentTarget);
+        var card_id = button.attr('data-cardId')
+        $.ajax({
+            url: '/edit/' + card_id,
+            error: function () {
+                alert('error')
+            },
+            success: function (data) {
+                cardInfo = JSON.parse(data);
+                var title = cardInfo['card_title'];
+                var text = cardInfo['card_text'];
+                $('#editCardTitle').val(title);
+                $('#editCardText').val(text);
+                $('#cardIdModal').val(card_id)
+            }
+        })
+    })
 
+    // UPDATE CARD
+    $('#edit_card').click(function (event) {
+        var card_id = $('form').find('#cardIdModal').val();
+        var card_title = $('form').find('#editCardTitle').val();
+        var card_text = $('form').find('#editCardText').val();
+        var board_id = $(this).attr('data-boardId')
+        $.ajax({
+            url: '/update/' + board_id + '/' + card_id + '/' + card_title + '/' + card_text,
+            error: function () {
+                alert('ERROR')
+            },
+            success: function () {
+                alert('vuhuuu');
+                location.reload()
+            }
+        })
+    })
     // START ///////////////////////////////////////////////////////////////
     sortableDiv();
 });

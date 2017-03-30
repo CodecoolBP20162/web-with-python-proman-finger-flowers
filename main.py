@@ -55,6 +55,37 @@ def update_order(board_id, card_title, card_text, status, position):
     update.execute()
     return json.dumps({'success': 'Order updated'})
 
+@app.route('/edit/<card_id>', methods=['GET'])
+def edit_card(card_id):
+    card = Card.select().where(Card.id == card_id)
+    card_title = ""
+    card_text = ""
+    for info in card:
+        card_title = info.title
+        card_text = info.text
+
+    return json.dumps({'card_id': card_id, 'card_title': card_title, 'card_text': card_text})
+
+@app.route('/update/<board_id>/<card_id>/<card_title>/<card_text>', methods=['GET'])
+def update_card(board_id, card_id, card_title, card_text):
+    update = Card.update(title=card_title, text=card_text).where(Card.id == card_id)
+    update.execute()
+    return json.dumps({'title': card_title, 'text': card_text})
+
+@app.route('/<board_id>/delete/<card_id>', methods=['GET'])
+def delete(board_id, card_id):
+    print(card_id)
+    print(board_id)
+    print('DELETE')
+    card = Card.select().where(Card.id == card_id).get()
+    card.delete_instance()
+    card.save()
+    cards_new = Card.select().where(Card.board == board_id, Card.status == "new").order_by(Card.position)
+    cards_in_progress = Card.select().where(Card.board == board_id, Card.status == "in_progress").order_by(Card.position)
+    cards_review = Card.select().where(Card.board == board_id, Card.status == "review").order_by(Card.position)
+    cards_done = Card.select().where(Card.board == board_id, Card.status == "done").order_by(Card.position)
+    return redirect('/' + board_id)
+
 
 if __name__ == "__main__":
     InitDatabase.init_db()
